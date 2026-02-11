@@ -5,7 +5,7 @@ import { useState } from "react";
 import { Badge } from "./ui/badge";
 
 const CartItem = () => {
-  const [cartCount] = useState(3);
+  const [cartCount] = useState(4);
 
   return (
     <Link href="/cart" className="relative">
