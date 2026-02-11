@@ -11,6 +11,7 @@ const getCart = async (): Promise<CartResponse> => {
 
     return res.json();
   } catch (err) {
+    console.error(err);
     throw new Error("Error fetching Cart");
   }
 };
