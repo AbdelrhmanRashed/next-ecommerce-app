@@ -44,7 +44,9 @@ const NavLinks = ({ variant }: { variant: Variant }) => {
         ))}
         <CartItem />
 
-        <Button variant="default">Login</Button>
+        <Button variant="default" className="cursor-pointer">
+          Login
+        </Button>
       </>
     );
 
