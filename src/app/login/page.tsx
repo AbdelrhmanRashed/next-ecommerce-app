@@ -18,7 +18,7 @@ export default async function LoginPage() {
         <div className="text-center">
           <h1 className="text-2xl font-bold tracking-tight">Sign in</h1>
           <p className="text-muted-foreground mt-1 text-sm">
-            Sign in with Google to continue
+            Sign in with Google or Facebook to continue
           </p>
         </div>
         <LoginForm />
