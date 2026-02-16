@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Menu } from "lucide-react";
 import { usePathname } from "next/navigation";
+import { useSession, signOut } from "next-auth/react";
 
 interface Navigation {
   path: string;
@@ -26,8 +27,24 @@ const navigation: Navigation[] = [
 
 const NavLinks = ({ variant }: { variant: Variant }) => {
   const pathName = usePathname();
+  const { data: session, status } = useSession();
+  const isLoggedIn = status === "authenticated" && !!session?.user;
 
   const isActive = (path: string) => path === pathName;
+
+  const handleLogout = () => {
+    signOut({ callbackUrl: "/" });
+  };
+
+  const authButton = isLoggedIn ? (
+    <Button variant="default" className="cursor-pointer" onClick={handleLogout}>
+      Logout
+    </Button>
+  ) : (
+    <Button variant="default" className="cursor-pointer" asChild>
+      <Link href="/login">Login</Link>
+    </Button>
+  );
 
   if (variant === "desktop")
     return (
@@ -36,17 +53,16 @@ const NavLinks = ({ variant }: { variant: Variant }) => {
           <li key={item.title}>
             <Link
               href={item.path}
-              className={`text-md font-medium transition duration-300 text-gray-600 hover:text-gray-800 ${isActive(item.path) && "text-gray-800"}`}
+              className={`text-md font-medium transition duration-300 text-gray-600 hover:text-gray-800 ${
+                isActive(item.path) && "text-gray-800"
+              }`}
             >
               {item.title}
             </Link>
           </li>
         ))}
         <CartItem />
-
-        <Button variant="default" className="cursor-pointer">
-          Login
-        </Button>
+        {authButton}
       </>
     );
 
@@ -60,7 +76,6 @@ const NavLinks = ({ variant }: { variant: Variant }) => {
               <Menu className="w-5 h-5" />
             </Button>
           </DropdownMenuTrigger>
-
           <DropdownMenuContent align="end">
             {navigation.map((item) => (
               <DropdownMenuItem asChild key={item.title}>
@@ -72,7 +87,15 @@ const NavLinks = ({ variant }: { variant: Variant }) => {
                 </Link>
               </DropdownMenuItem>
             ))}
-            <DropdownMenuItem>Login</DropdownMenuItem>
+            {isLoggedIn ? (
+              <DropdownMenuItem onClick={handleLogout}>
+                Logout
+              </DropdownMenuItem>
+            ) : (
+              <DropdownMenuItem asChild>
+                <Link href="/login">Login</Link>
+              </DropdownMenuItem>
+            )}
           </DropdownMenuContent>
         </DropdownMenu>
       </>

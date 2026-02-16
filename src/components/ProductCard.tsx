@@ -22,8 +22,8 @@ const ProductCard = ({ product }: ProductCardProps) => {
   const badgeColor = productAvailability.includes("in")
     ? "bg-green-600"
     : productAvailability.includes("low")
-      ? "bg-amber-600"
-      : "bg-red-600";
+    ? "bg-amber-600"
+    : "bg-red-600";
 
   const discountedPrice = (
     product.price -

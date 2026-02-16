@@ -8,9 +8,12 @@ export const authOptions = {
       clientSecret: process.env.AUTH_GOOGLE_SECRET as string,
     }),
   ],
+  pages: {
+    signIn: "/login",
+  },
 };
 
-export const {
-  auth,
-  handlers: { POST, GET },
-} = NextAuth(authOptions);
+const result = NextAuth(authOptions);
+export const auth = result.auth;
+export const GET = result.handlers.GET;
+export const POST = result.handlers.POST;

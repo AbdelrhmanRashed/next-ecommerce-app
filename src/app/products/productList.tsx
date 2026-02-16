@@ -26,16 +26,16 @@ const ProductList = async ({ filteredValue }: ProductListProps) => {
 
   if (filteredValue === "in_stock")
     filteredProducts = products.filter(
-      (product) => product.availabilityStatus === "In Stock",
+      (product) => product.availabilityStatus === "In Stock"
     );
   if (filteredValue === "low_stock")
     filteredProducts = products.filter(
-      (product) => product.availabilityStatus === "Low Stock",
+      (product) => product.availabilityStatus === "Low Stock"
     );
 
   if (filteredValue === "out_of_stock")
     filteredProducts = products.filter(
-      (product) => product.availabilityStatus === "Out of Stock",
+      (product) => product.availabilityStatus === "Out of Stock"
     );
 
   return (
