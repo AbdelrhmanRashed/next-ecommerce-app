@@ -10,6 +10,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import Image from "next/image";
+import Link from "next/link";
 import { ShoppingCart, ArrowRight } from "lucide-react";
 
 interface ProductCardProps {
@@ -107,9 +108,12 @@ const ProductCard = ({ product }: ProductCardProps) => {
             transition-all duration-200
             cursor-pointer
           "
+          asChild
         >
-          More Details
-          <ArrowRight className="w-4 h-4" />
+          <Link href={`/products/${product.id}`}>
+            More Details
+            <ArrowRight className="w-4 h-4" />
+          </Link>
         </Button>
       </div>
 
